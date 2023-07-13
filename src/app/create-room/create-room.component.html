@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row align-items-center" style="height: 75vh;">
     <div class="mx-auto col-10 col-md-8 col-lg-6">
-      <form novalidate [formGroup]="checkoutForm" (submit)="createRoom()">
+      <form [formGroup]="createRoomForm" (submit)="createRoom()">
         <div class="form-group mb-3">
           <label for="nicknameInput" class="form-label">Nickname</label>
           <input type="text"
@@ -12,9 +12,10 @@
                  minlength="2"
                  maxlength="32"
                  required
-                 [ngClass]="{'is-invalid': this.checkoutForm.controls['nickname'].touched &&
-                 this.checkoutForm.controls['nickname'].errors,
-                 'is-valid': this.checkoutForm.controls['nickname'].valid}">
+                 [ngClass]="{'is-invalid': this.createRoomForm.controls['nickname'].touched &&
+                 this.createRoomForm.controls['nickname'].errors,
+                 'is-valid': this.createRoomForm.controls['nickname'].valid &&
+                 this.createRoomForm.controls['nickname'].touched}">
         </div>
         <div class="form-group mb-3">
           <label for="roomNameInput" class="form-label">Room Name</label>
@@ -26,9 +27,10 @@
                  minlength="2"
                  maxlength="32"
                  required
-                 [ngClass]="{'is-invalid': this.checkoutForm.controls['roomName'].touched &&
-                 this.checkoutForm.controls['roomName'].errors,
-                 'is-valid': this.checkoutForm.controls['roomName'].valid}">
+                 [ngClass]="{'is-invalid': this.createRoomForm.controls['roomName'].touched &&
+                 this.createRoomForm.controls['roomName'].errors,
+                 'is-valid': this.createRoomForm.controls['roomName'].valid &&
+                 this.createRoomForm.controls['roomName'].touched}">
         </div>
         <div class="form-group mb-3">
           <label for="deckInput" class="form-label">Deck</label>
@@ -40,9 +42,10 @@
                  placeholder="Deck Format: [card_value_1]; [card_value_2]; ... ; [card_value_20]"
                  maxlength="158"
                  required
-                 [ngClass]="{'is-invalid': this.checkoutForm.controls['deck'].touched &&
-                 this.checkoutForm.controls['deck'].errors,
-                 'is-valid': this.checkoutForm.controls['deck'].valid}">
+                 [ngClass]="{'is-invalid': this.createRoomForm.controls['deck'].touched &&
+                 this.createRoomForm.controls['deck'].errors,
+                 'is-valid': this.createRoomForm.controls['deck'].valid &&
+                 this.createRoomForm.controls['deck'].touched}">
           <div id="deckHelp" class="form-text">
             Deck is a set of cards that participants can choose during a vote.
             The deck contains no more than 20 cards.
@@ -60,7 +63,7 @@
           </label>
         </div>
         <div class="d-grid gap-2">
-          <button class="btn btn-primary" type="submit" [disabled]="checkoutForm.invalid">Create Room</button>
+          <button class="btn btn-primary" type="submit" [disabled]="createRoomForm.invalid">Create Room</button>
         </div>
       </form>
     </div>
