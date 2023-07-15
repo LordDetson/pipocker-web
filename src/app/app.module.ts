@@ -10,6 +10,7 @@ import {ThemeSwitcherComponent} from './theme-switcher/theme-switcher.component'
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RoomComponent} from './room/room.component';
 import {HttpClientModule} from "@angular/common/http";
+import { AddParticipantComponent } from './add-participant/add-participant.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {HttpClientModule} from "@angular/common/http";
     CreateRoomComponent,
     HeaderComponent,
     ThemeSwitcherComponent,
-    RoomComponent
+    RoomComponent,
+    AddParticipantComponent
   ],
   imports: [
     BrowserModule,
