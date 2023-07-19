@@ -15,10 +15,6 @@ export class RoomService {
   }
 
   create(createRoom: any): Observable<Room> {
-    let cards: Card[] = createRoom.deck.split("; ").map((value: string, index: number) => {
-      return {value};
-    })
-    createRoom.deck = {cards};
     return this.http.post<Room>(AppConstants.apiUrl + "/room", createRoom, {
       headers: {
         'Content-Type': 'application/json'
@@ -43,12 +39,20 @@ export class RoomService {
     });
   }
 
-  addParticipant(id: string, nickname: string, watcher: boolean): Observable<Room> {
-    let participant: Participant = {nickname, watcher}
-    return this.http.put<Room>(AppConstants.apiUrl + "/room/" + id, participant, {
+  addParticipant(id: string, participant: Participant): Observable<Participant> {
+    return this.http.put<Participant>(AppConstants.apiUrl + "/room/" + id + "/add-participant", participant, {
       headers: {
         'Content-Type': 'application/json'
       }
+    });
+  }
+
+  removeParticipant(id: string, participant: Participant): Observable<Participant> {
+    return this.http.delete<Participant>(AppConstants.apiUrl + "/room/" + id + "/remove-participant", {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      params: new HttpParams().set('nickname', participant.nickname)
     });
   }
 }

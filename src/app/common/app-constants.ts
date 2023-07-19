@@ -6,4 +6,9 @@ export class AppConstants {
   public static startNewVoting: string = "Start New Voting";
   public static btnSecondaryClass: string = "btn-secondary";
   public static btnPrimaryClass: string = "btn-primary";
+  public static lastNickname: string = "last-nickname";
+  public static lastRoomName: string = "last-room-name";
+  public static lastDeck: string = "last-deck";
+  public static lastWatcher: string = "last-watcher";
+  public static lastTheme: string = "last-theme";
 }
