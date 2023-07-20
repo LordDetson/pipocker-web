@@ -9,7 +9,7 @@ import {AppConstants} from "../../common/app-constants";
 })
 export class ThemeSwitcherComponent implements OnInit {
 
-  isLightTheme: boolean = false;
+  isLightTheme: boolean;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -18,11 +18,8 @@ export class ThemeSwitcherComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let lastTheme = localStorage.getItem(AppConstants.lastTheme);
-    if (lastTheme) {
-      this.isLightTheme = (lastTheme == "true");
-      this.updateTheme()
-    }
+    this.isLightTheme = JSON.parse(localStorage.getItem(AppConstants.lastTheme) as string) ?? false;
+    this.updateTheme();
   }
 
   onThemeSwitchChange(): void {

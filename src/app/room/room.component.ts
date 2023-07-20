@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Room} from "../models/room.model";
 import {AppConstants} from "../common/app-constants";
-import {Observable} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {select, Store} from "@ngrx/store";
 import * as RoomSelector from "../store/room/room.selector";
 import {Participant} from "../models/participant.model";
@@ -17,7 +17,7 @@ import * as ParticipantSelector from "../store/participant/participant.selector"
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.css']
 })
-export class RoomComponent implements OnInit {
+export class RoomComponent implements OnInit, OnDestroy {
 
   roomStatus$: Observable<string> = this.store.pipe(select(RoomSelector.statusSelector));
   participants$: Observable<Participant[]> = this.store.pipe(select(RoomSelector.participantsSelector));
@@ -26,6 +26,7 @@ export class RoomComponent implements OnInit {
   mainBtnText: string = AppConstants.voting;
   mainBtnClass: string = AppConstants.btnSecondaryClass;
   disable: boolean = true;
+  ngDestroyed$ = new Subject<void>();
 
   constructor(
     private store: Store<Room>,
@@ -34,12 +35,18 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.roomStatus$.subscribe((status: string) => {
-      if (status == RoomStatus.pending) {
-        let roomId = this.route.snapshot.params['id'];
-        this.store.dispatch(RoomAction.get({roomId}));
-      }
-    })
+    this.roomStatus$.pipe(takeUntil(this.ngDestroyed$))
+      .subscribe((status: string) => {
+        if (status == RoomStatus.pending) {
+          const roomId = this.route.snapshot.params['id'];
+          this.store.dispatch(RoomAction.get({roomId}));
+        }
+      });
     window.addEventListener("beforeunload", () => this.store.dispatch(ParticipantAction.destroy()));
+  }
+
+  ngOnDestroy(): void {
+    this.ngDestroyed$.next();
+    this.ngDestroyed$.complete();
   }
 }
