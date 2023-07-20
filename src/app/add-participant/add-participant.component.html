@@ -1,0 +1,32 @@
+<div class="container-fluid d-flex justify-content-center align-content-center flex-wrap" style="height: 75vh">
+  <form [formGroup]="joinToRoomForm" (submit)="addParticipant()"
+        class="col-10 col-md-8 col-lg-6">
+    <div class="form-group mb-3">
+      <label for="nicknameInput" class="form-label">Nickname</label>
+      <input type="text"
+             class="form-control"
+             id="nicknameInput"
+             formControlName="nickname"
+             placeholder="Choose your display name"
+             minlength="2"
+             maxlength="32"
+             required
+             [ngClass]="{'is-invalid': this.joinToRoomForm.controls['nickname'].touched &&
+                 this.joinToRoomForm.controls['nickname'].errors,
+                 'is-valid': this.joinToRoomForm.controls['nickname'].valid &&
+                 this.joinToRoomForm.controls['nickname'].touched}">
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input"
+             type="checkbox"
+             id="watcherInput"
+             formControlName="watcher">
+      <label class="form-check-label" for="watcherInput">
+        Join as watcher
+      </label>
+    </div>
+    <div class="d-grid gap-2">
+      <button class="btn btn-primary" type="submit" [disabled]="joinToRoomForm.invalid">Join Room</button>
+    </div>
+  </form>
+</div>
