@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {select, Store} from "@ngrx/store";
+import {Observable} from "rxjs";
+import {idSelector, nameSelector} from "../store/room/room.selector";
+import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +11,16 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  roomId$: Observable<string> = this.store.pipe(select(idSelector));
+  roomName$: Observable<string> = this.store.pipe(select(nameSelector));
+
+  constructor(
+    private store: Store,
+    private clipboard: Clipboard
+  ) {
+  }
+
+  copyInvitationLink(roomId: string): void {
+    this.clipboard.copy("http://localhost:4200/room/" + roomId)
+  }
 }

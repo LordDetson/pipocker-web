@@ -1,11 +1,8 @@
 import {Deck} from "./deck.model";
 
-export class CreateRoom {
-  constructor(
-    public nickname: string,
-    public roomName: string,
-    public deck: Deck,
-    public watcher: boolean
-  ) {
-  }
+export interface CreateRoomInfo {
+  nickname: string;
+  roomName: string;
+  deck: Deck;
+  watcher: boolean;
 }

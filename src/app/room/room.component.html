@@ -1,31 +1,36 @@
-<div class="container-fluid" style="height: 65vh;">
-  <div class="row mx-auto col-9 col-md-5 col-lg-3" style="height: 7vh;">
-    <button id="mainBtn" type="button"
-            class="btn btn-lg gap-3 px-4 {{mainBtnClass}}"
-            [disabled]="disable">
-      {{mainBtnText}}
-    </button>
-  </div>
-  <div class="d-flex justify-content-center" style="height: 58vh;">
-    <div class="my-3 d-flex justify-content-center align-content-center flex-wrap" style="width: 560px;">
-      <div *ngFor="let participant of room.participants"
-           class="card m-2" style="width: 6rem; height: 9rem;">
-        <div class="card-body d-flex align-items-center flex-column">
-          <h5 class="card-title">{{participant.nickname}}</h5>
-          <p class="card-text m-auto">1</p>
+<ng-container *ngIf="(participantStatus$ | async) == 'pending'; else room">
+  <app-add-participant/>
+</ng-container>
+<ng-template #room>
+  <div class="container-fluid" style="height: 65vh;">
+    <div class="row mx-auto col-9 col-md-5 col-lg-3" style="height: 7vh;">
+      <button id="mainBtn" type="button"
+              class="btn btn-lg gap-3 px-4 {{mainBtnClass}}"
+              [disabled]="disable">
+        {{mainBtnText}}
+      </button>
+    </div>
+    <div class="d-flex justify-content-center" style="height: 58vh;">
+      <div class="my-3 d-flex justify-content-center align-content-center flex-wrap" style="width: 560px;">
+        <div *ngFor="let participant of (participants$ | async)"
+             class="card m-2" style="width: 6rem; height: 9rem;">
+          <div class="card-body d-flex align-items-center flex-column">
+            <h5 class="card-title">{{participant.nickname}}</h5>
+            <p class="card-text m-auto">1</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="container-fluid" style="height: 23vh;">
-  <div class="mb-3 d-flex justify-content-center align-content-center align-content-stretch flex-wrap"
-       style="height: 23vh;">
-    <div *ngFor="let card of room.deck.cards"
-         class="card m-2" style="width: 6rem; max-height: 9rem;">
-      <div class="card-body d-flex align-items-center flex-column">
-        <p class="card-text m-auto">{{card.value}}</p>
+  <div class="container-fluid" style="height: 23vh;">
+    <div class="mb-3 d-flex justify-content-center align-content-center align-content-stretch flex-wrap"
+         style="height: 23vh;">
+      <div *ngFor="let card of cards$ | async"
+           class="card m-2" style="width: 6rem; max-height: 9rem;">
+        <div class="card-body d-flex align-items-center flex-column">
+          <p class="card-text m-auto">{{card.value}}</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</ng-template>

@@ -1,11 +1,20 @@
-<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom shadow-sm">
-  <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" href="/">
-    <img src="/assets/svg/sun.svg"
-         width="30"
-         height="30"
-         class="ms-3 me-3"
-         alt="PiPoker Logo">
-    <strong class="fs-4">PiPoker</strong>
-  </a>
-  <app-theme-switcher class="me-3"/>
-</header>
+<div class="container-fluid">
+  <header class="row d-flex justify-content-between align-items-center p-3 shadow-sm">
+    <a class="col-4 d-flex align-items-center link-body-emphasis text-decoration-none" href="/">
+      <img src="/assets/svg/sun.svg"
+           width="30"
+           height="30"
+           class="me-3"
+           alt="PiPoker Logo">
+      <strong class="fs-3">PiPoker</strong>
+    </a>
+    <strong *ngIf="roomName$ | async as roomName" class="col-4 text-center fs-4">{{roomName}}</strong>
+    <div class="col-4 d-flex justify-content-end align-items-center">
+      <button *ngIf="roomId$ | async as roomId" type="button" class="btn btn-primary me-3"
+              (click)="copyInvitationLink(roomId)">
+        Copy Invitation Link
+      </button>
+      <app-theme-switcher/>
+    </div>
+  </header>
+</div>
