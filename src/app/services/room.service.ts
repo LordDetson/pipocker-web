@@ -5,6 +5,7 @@ import {Room} from "../models/room.model";
 import {AppConstants} from "../common/app-constants";
 import {Card} from "../models/card.model";
 import {Participant} from "../models/participant.model";
+import {Vote} from "../models/vote";
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,23 @@ export class RoomService {
         'Content-Type': 'application/json'
       },
       params: new HttpParams().set('nickname', participant.nickname)
+    });
+  }
+
+  vote(id: string, participant: Participant, card: Card): Observable<Vote> {
+    const vote: Vote = {participant, card}
+    return this.http.post<Vote>(AppConstants.apiUrl + "/room/" + id + "/vote", vote, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
+  clearVotingResult(id: string): Observable<void> {
+    return this.http.get<void>(AppConstants.apiUrl + "/room/" + id + "/clearVotingResult", {
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
   }
 }

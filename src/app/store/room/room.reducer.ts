@@ -13,9 +13,10 @@ const initialRoomState: RoomState = {
     },
     participants: [],
     votingResult: {
-      map: new Map<Participant, Card>()
+      map: new Map<string, Card>([])
     }
   },
+  showVotingResult: false,
   error: undefined,
   status: RoomStatus.pending
 };
@@ -59,6 +60,51 @@ const _roomReducer = createReducer<RoomState>(initialRoomState,
     }
   })),
   on(RoomAction.removeParticipantFailure, (state, {error}) => ({
+    ...state,
+    error,
+    status: RoomStatus.error
+  })),
+  on(RoomAction.selectCard, state => ({
+    ...state,
+    status: RoomStatus.loading
+  })),
+  on(RoomAction.cardSelectionSuccess, (state, {vote}) => {
+    let map: Map<string, Card> = new Map<string, Card>(state.room.votingResult.map);
+    map.set(vote.participant.nickname, vote.card);
+    return {
+      ...state,
+      room: {
+        ...state.room,
+        votingResult: {
+          ...state.room.votingResult,
+          map
+        }
+      },
+      status: RoomStatus.success
+    };
+  }),
+  on(RoomAction.cardSelectionFailure, (state, {error}) => ({
+    ...state,
+    error,
+    status: RoomStatus.error
+  })),
+  on(RoomAction.showVotingResult, state => ({
+    ...state,
+    showVotingResult: true
+  })),
+  on(RoomAction.startNewVotingSuccess, state => ({
+    ...state,
+    room: {
+      ...state.room,
+      votingResult: {
+        ...state.room.votingResult,
+        map: new Map<string, Card>()
+      }
+    },
+    showVotingResult: false,
+    status: RoomStatus.success
+  })),
+  on(RoomAction.startNewVotingFailure, (state, {error}) => ({
     ...state,
     error,
     status: RoomStatus.error
