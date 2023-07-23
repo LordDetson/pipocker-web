@@ -1,5 +1,6 @@
 import {createAction, props} from "@ngrx/store";
 import {Participant} from "../../models/participant.model";
+import {Vote} from "../../models/vote";
 
 export enum ParticipantActionType {
   init = "[Participant] init",
@@ -7,6 +8,10 @@ export enum ParticipantActionType {
   initFailure = "[Participant] init failure",
   destroy = "[Participant] destroy",
   destroySuccess = "[Participant] destroy success",
+  initSelectedCurdSuccess = "[Participant] init selected card success",
+  initSelectedCurdFailure = "[Participant] init selected card failure",
+  destroySelectedCurdSuccess = "[Participant] destroy selected card success",
+  destroySelectedCurdFailure = "[Participant] destroy selected card failure",
 }
 
 export const init = createAction(ParticipantActionType.init);
@@ -16,3 +21,10 @@ export const initFailure = createAction(ParticipantActionType.initFailure,
   props<{ error: any }>());
 export const destroy = createAction(ParticipantActionType.destroy);
 export const destroySuccess = createAction(ParticipantActionType.destroySuccess);
+export const initSelectedCurdSuccess = createAction(ParticipantActionType.initSelectedCurdSuccess,
+  props<{ vote: Vote }>());
+export const initSelectedCurdFailure = createAction(ParticipantActionType.initSelectedCurdFailure,
+  props<{ error: any }>());
+export const destroySelectedCurdSuccess = createAction(ParticipantActionType.destroySelectedCurdSuccess);
+export const destroySelectedCurdFailure = createAction(ParticipantActionType.destroySelectedCurdFailure,
+  props<{ error: any }>());

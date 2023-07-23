@@ -2,6 +2,7 @@ import {Room} from "../../models/room.model";
 
 export interface RoomState {
   room: Room;
+  showVotingResult: boolean;
   error: any;
   status: RoomStatus;
 }

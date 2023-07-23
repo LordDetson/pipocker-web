@@ -14,9 +14,14 @@ import {AddParticipantComponent} from './room/add-participant/add-participant.co
 import {StoreModule} from "@ngrx/store";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {metaReducers, reducers} from "./store/intex";
-import { EffectsModule } from '@ngrx/effects';
+import {EffectsModule} from '@ngrx/effects';
 import {RoomEffect} from "./store/room/room.effect";
 import {ParticipantEffect} from "./store/participant/participant.effect";
+import {ButtonsComponent} from './room/buttons/buttons.component';
+import {TableComponent} from './room/table/table.component';
+import {DeckComponent} from './room/deck/deck.component';
+import {DeckCardComponent} from './room/deck/deck-card/deck-card.component';
+import {TableCardComponent} from './room/table/table-card/table-card.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,12 @@ import {ParticipantEffect} from "./store/participant/participant.effect";
     HeaderComponent,
     ThemeSwitcherComponent,
     RoomComponent,
-    AddParticipantComponent
+    AddParticipantComponent,
+    ButtonsComponent,
+    TableComponent,
+    DeckComponent,
+    DeckCardComponent,
+    TableCardComponent
   ],
   imports: [
     BrowserModule,

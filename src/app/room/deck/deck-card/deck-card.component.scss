@@ -1,0 +1,9 @@
+:host {
+  width: 6rem;
+  max-height: 9rem;
+}
+
+:host(.selected) {
+  background-color: var(--bs-blue);
+  color: white;
+}

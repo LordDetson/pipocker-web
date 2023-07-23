@@ -4,6 +4,7 @@ import * as ParticipantAction from "./participant.action";
 
 const initialState: CurrentParticipantState = {
   currentParticipant: undefined,
+  selectedCard: undefined,
   error: undefined,
   status: CurrentParticipantStatus.pending
 };
@@ -31,7 +32,27 @@ const _currentParticipantReducer = createReducer<CurrentParticipantState>(initia
     ...state,
     currentParticipant: undefined,
     status: CurrentParticipantStatus.success,
-  }))
+  })),
+  on(ParticipantAction.initSelectedCurdSuccess, (state, {vote}) => ({
+    ...state,
+    selectedCard: vote.card,
+    status: CurrentParticipantStatus.success,
+  })),
+  on(ParticipantAction.initSelectedCurdFailure, (state, {error}) => ({
+    ...state,
+    error: error,
+    status: CurrentParticipantStatus.error,
+  })),
+  on(ParticipantAction.destroySelectedCurdSuccess, state => ({
+    ...state,
+    selectedCard: undefined,
+    status: CurrentParticipantStatus.success,
+  })),
+  on(ParticipantAction.destroySelectedCurdFailure, (state, {error}) => ({
+    ...state,
+    error: error,
+    status: CurrentParticipantStatus.error,
+  })),
 );
 
 export function currentParticipantReducer(state: CurrentParticipantState | undefined, action: Action) {
