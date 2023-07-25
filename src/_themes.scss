@@ -1,11 +1,27 @@
 [data-bs-theme="light"] {
+  --bs-gray-800-rgb: 52, 58, 64;
+  --bs-emphasis-color-rgb: var(--bs-gray-800-rgb);
+
   header {
-    background-color: var(--bs-gray-200)!important;
+    background-color: var(--bs-gray-200) !important;
+    color: var(--bs-gray-700) !important;
   }
 }
 
 [data-bs-theme="dark"] {
+  --bs-blue: #4b6eaf;
+
   header {
-    background-color: var(--bs-gray-700)!important;
+    background-color: var(--bs-gray-700) !important;
+    color: white;
+  }
+
+  .btn-primary {
+    --bs-btn-bg: #4b6eaf;
+    --bs-btn-border-color: #4b6eaf;
+    --bs-btn-hover-bg: #557dc7;
+    --bs-btn-hover-border-color: #557dc7;
+    --bs-btn-active-bg: #4271cb;
+    --bs-btn-active-border-color: #4271cb;
   }
 }
