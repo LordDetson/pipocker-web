@@ -4,3 +4,19 @@
   min-height: 12vh;
   max-height: 12vh;
 }
+
+.add-user-icon {
+  display: inline-block;
+  height: 26px;
+  width: 30px;
+}
+
+.not-copied > .add-user-icon {
+  background: url("src/assets/svg/add-user.svg") no-repeat;
+  background-size: 26px 26px;
+}
+
+.copied > .add-user-icon {
+  background: url("src/assets/svg/copy.svg") no-repeat;
+  background-size: 26px 26px;
+}

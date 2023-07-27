@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 254.97 234.43">
+  <g id="Layer_1" data-name="Layer 1">
+    <path d="m165.81,0h-76.65c-18.16,0-34.95,9.69-44.03,25.42L6.81,91.8c-9.08,15.73-9.08,35.11,0,50.84l38.32,66.38c9.08,15.73,25.87,25.42,44.03,25.42h76.65c18.16,0,34.95-9.69,44.03-25.42l38.32-66.38c9.08-15.73,9.08-35.11,0-50.84l-38.32-66.38C200.76,9.69,183.97,0,165.81,0Z" fill="#4b6eaf"/>
+  </g>
+  <g id="Layer_2" data-name="Layer 2">
+    <g>
+      <text transform="translate(134.96 116.96) rotate(5)" fill="#fff" font-family="Rubik-Medium, Rubik" font-size="44.57" font-weight="500"><tspan x="0" y="0">1</tspan><tspan x="20.64" y="0" letter-spacing="-.02em">w</tspan></text>
+      <rect x="113.68" y="45.69" width="87.32" height="121.43" rx="8.51" ry="8.51" transform="translate(9.87 -13.31) rotate(5)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="6"/>
+      <rect x="50.92" y="65.7" width="87.32" height="121.43" rx="8.51" ry="8.51" transform="translate(-20.51 18.34) rotate(-10)" fill="#4b6eaf" stroke="#fff" stroke-miterlimit="10" stroke-width="6"/>
+      <text transform="translate(69.6 144.09) rotate(-10)" fill="#fff" font-family="Rubik-Medium, Rubik" font-size="44.57" font-weight="500"><tspan x="0" y="0">3d</tspan></text>
+    </g>
+  </g>
+</svg>
