@@ -61,7 +61,6 @@ export class AddParticipantComponent implements OnInit, OnDestroy {
         nickname: this.joinToRoomForm.value.nickname,
         watcher: this.joinToRoomForm.value.watcher
       }
-      this.joinToRoomForm.reset();
       this.store.dispatch(RoomAction.addParticipant({roomId: this.roomId, participant}));
     }
   }

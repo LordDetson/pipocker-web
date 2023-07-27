@@ -90,7 +90,6 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
           watcher: this.createRoomForm.value.watcher!
         }
       }));
-      this.createRoomForm.reset();
     }
   }
 }
