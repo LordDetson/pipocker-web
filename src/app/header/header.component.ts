@@ -13,6 +13,7 @@ export class HeaderComponent {
 
   roomId$: Observable<string> = this.store.pipe(select(idSelector));
   roomName$: Observable<string> = this.store.pipe(select(nameSelector));
+  copied: boolean;
 
   constructor(
     private store: Store,
@@ -21,6 +22,8 @@ export class HeaderComponent {
   }
 
   copyInvitationLink(roomId: string): void {
-    this.clipboard.copy("http://localhost:4200/room/" + roomId)
+    this.clipboard.copy("http://localhost:4200/room/" + roomId);
+    this.copied = true;
+    setTimeout(() => this.copied = false, 1500);
   }
 }
