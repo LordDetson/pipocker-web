@@ -8,8 +8,6 @@ import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import * as RoomSelector from "./room.selector";
 import * as ParticipantSelector from "../participant/participant.selector";
-import {Participant} from "../../models/participant.model";
-import {Card} from "../../models/card.model";
 
 @Injectable()
 export class RoomEffect {
@@ -19,13 +17,12 @@ export class RoomEffect {
       ofType(RoomAction.create),
       switchMap(action =>
         this.roomService.create(action.createRoomInfo).pipe(
-          switchMap(room => {
-            room.votingResult.map = new Map<string, Card>();
-            return of(
+          switchMap(room =>
+            of(
               RoomAction.initSuccess({room}),
               ParticipantAction.initSuccess({participant: room.participants[0]})
             )
-          }),
+          ),
           catchError(error =>
             of(
               RoomAction.initFailure({error}),

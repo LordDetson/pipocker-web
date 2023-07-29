@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {Room} from "../models/room.model";
 import {AppConstants} from "../common/app-constants";
 import {Card} from "../models/card.model";
@@ -20,7 +20,12 @@ export class RoomService {
       headers: {
         'Content-Type': 'application/json'
       }
-    });
+    }).pipe(
+      map((room: Room) => {
+        room.votingResult.map = new Map<string, Card>(Object.entries(room.votingResult.map))
+        return room;
+      })
+    );
   }
 
   get(id: string): Observable<Room> {
@@ -28,7 +33,12 @@ export class RoomService {
       headers: {
         'Content-Type': 'application/json'
       }
-    });
+    }).pipe(
+      map((room: Room) => {
+        room.votingResult.map = new Map<string, Card>(Object.entries(room.votingResult.map))
+        return room;
+      })
+    );
   }
 
   checkIfNicknameExist(id: string, nickname: string): Observable<boolean> {
