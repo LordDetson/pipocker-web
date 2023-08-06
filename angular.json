@@ -28,7 +28,11 @@
               "src/rubik-fonts.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "sockjs-client",
+              "stompjs"
+            ]
           },
           "configurations": {
             "production": {

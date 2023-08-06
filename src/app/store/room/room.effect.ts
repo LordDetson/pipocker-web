@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import * as RoomSelector from "./room.selector";
 import * as ParticipantSelector from "../participant/participant.selector";
+import {RoomWebSocketService} from "../../services/room-web-socket.service";
 
 @Injectable()
 export class RoomEffect {
@@ -49,6 +50,14 @@ export class RoomEffect {
     {dispatch: false}
   );
 
+  connectWebSocket$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(RoomAction.initSuccess),
+        tap(action => this.roomWebSocketService.connect(action.room.id))
+      ),
+    {dispatch: false}
+  );
+
   getRoom$ = createEffect(() =>
     this.actions$.pipe(
       ofType(RoomAction.get),
@@ -66,12 +75,7 @@ export class RoomEffect {
       ofType(RoomAction.addParticipant),
       switchMap(action =>
         this.roomService.addParticipant(action.roomId, action.participant).pipe(
-          switchMap(participant =>
-            of(
-              ParticipantAction.initSuccess({participant}),
-              RoomAction.addParticipantSuccess({participant})
-            )
-          ),
+          switchMap(participant => of(ParticipantAction.initSuccess({participant}))),
           catchError(error =>
             of(
               ParticipantAction.initFailure({error}),
@@ -88,7 +92,7 @@ export class RoomEffect {
       ofType(RoomAction.removeParticipant),
       mergeMap(action =>
         this.roomService.removeParticipant(action.roomId, action.participant).pipe(
-          map(participant => RoomAction.removeParticipantSuccess({participant})),
+          map(participant => RoomAction.doNothing),
           catchError(error => of(RoomAction.removeParticipantFailure({error})))
         )
       )
@@ -104,12 +108,7 @@ export class RoomEffect {
       ),
       switchMap(([action, roomId, participant]) =>
         this.roomService.vote(roomId, action.participant, action.card).pipe(
-          switchMap(vote => {
-            return of(
-              RoomAction.cardSelectionSuccess({vote}),
-              ParticipantAction.initSelectedCurdSuccess({vote})
-            );
-          }),
+          switchMap(vote => of(ParticipantAction.initSelectedCurdSuccess({card: vote.card}))),
           catchError(error =>
             of(
               RoomAction.cardSelectionFailure({error}),
@@ -121,18 +120,22 @@ export class RoomEffect {
     )
   );
 
+  showVotingResult$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(RoomAction.showVotingResult),
+      withLatestFrom(this.store.select(RoomSelector.idSelector)),
+      tap(([action, roomId]) => this.roomService.showVotingResult(roomId))
+    ),
+    {dispatch: false}
+  )
+
   startNewVoting$ = createEffect(() =>
     this.actions$.pipe(
       ofType(RoomAction.startNewVoting),
       withLatestFrom(this.store.select(RoomSelector.idSelector)),
       switchMap(([action, roomId]) =>
         this.roomService.clearVotingResult(roomId).pipe(
-          switchMap(() => {
-            return of(
-              RoomAction.startNewVotingSuccess(),
-              ParticipantAction.destroySelectedCurdSuccess()
-            );
-          }),
+          switchMap(() => of(ParticipantAction.doNothing  ())),
           catchError(error =>
             of(
               RoomAction.startNewVotingFailure({error}),
@@ -144,9 +147,17 @@ export class RoomEffect {
     )
   );
 
+  dispatchDestroySelectedCurdSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(RoomAction.startNewVotingSuccess),
+      switchMap(action => of(ParticipantAction.destroySelectedCurdSuccess()))
+    ),
+  )
+
   constructor(
     private actions$: Actions,
     private roomService: RoomService,
+    private roomWebSocketService: RoomWebSocketService,
     private router: Router,
     private store: Store
   ) {

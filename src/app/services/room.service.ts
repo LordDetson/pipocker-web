@@ -6,13 +6,17 @@ import {AppConstants} from "../common/app-constants";
 import {Card} from "../models/card.model";
 import {Participant} from "../models/participant.model";
 import {Vote} from "../models/vote";
+import {RoomWebSocketService} from "./room-web-socket.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private roomWebSocketService: RoomWebSocketService
+  ) {
   }
 
   create(createRoom: any): Observable<Room> {
@@ -82,5 +86,9 @@ export class RoomService {
         'Content-Type': 'application/json'
       }
     });
+  }
+
+  showVotingResult(roomId: string) {
+    this.roomWebSocketService.sendShowVotingResultEvent(roomId);
   }
 }

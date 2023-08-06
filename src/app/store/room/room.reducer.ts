@@ -56,7 +56,7 @@ const _roomReducer = createReducer<RoomState>(initialRoomState,
     ...state,
     room: {
       ...state.room,
-      participants: state.room.participants.filter((item) => item !== participant)
+      participants: state.room.participants.filter((item) => item.nickname !== participant.nickname)
     }
   })),
   on(RoomAction.removeParticipantFailure, (state, {error}) => ({
@@ -68,9 +68,9 @@ const _roomReducer = createReducer<RoomState>(initialRoomState,
     ...state,
     status: RoomStatus.loading
   })),
-  on(RoomAction.cardSelectionSuccess, (state, {vote}) => {
+  on(RoomAction.cardSelectionSuccess, (state, {participant, card}) => {
     let map: Map<string, Card> = new Map<string, Card>(state.room.votingResult.map);
-    map.set(vote.participant.nickname, vote.card);
+    map.set(participant.nickname, card);
     return {
       ...state,
       room: {
@@ -88,7 +88,7 @@ const _roomReducer = createReducer<RoomState>(initialRoomState,
     error,
     status: RoomStatus.error
   })),
-  on(RoomAction.showVotingResult, state => ({
+  on(RoomAction.showVotingResultSuccess, state => ({
     ...state,
     showVotingResult: true
   })),
