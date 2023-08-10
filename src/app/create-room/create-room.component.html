@@ -4,7 +4,7 @@
     <div class="form-group mb-3">
       <label for="nicknameInput" class="form-label">Nickname</label>
       <input type="text"
-             class="form-control"
+             class="form-control common-transition"
              id="nicknameInput"
              formControlName="nickname"
              placeholder="Choose your display name"
@@ -19,7 +19,7 @@
     <div class="form-group mb-3">
       <label for="roomNameInput" class="form-label">Room Name</label>
       <input type="text"
-             class="form-control"
+             class="form-control common-transition"
              id="roomNameInput"
              formControlName="roomName"
              placeholder="Choose room display name"
@@ -34,7 +34,7 @@
     <div class="form-group mb-3">
       <label for="deckInput" class="form-label">Deck</label>
       <input type="text"
-             class="form-control"
+             class="form-control common-transition"
              id="deckInput"
              formControlName="deck"
              aria-labelledby="deckHelp"
@@ -45,7 +45,7 @@
                  this.createRoomForm.controls['deck'].errors,
                  'is-valid': this.createRoomForm.controls['deck'].valid &&
                  this.createRoomForm.controls['deck'].touched}">
-      <div id="deckHelp" class="form-text">
+      <div id="deckHelp" class="form-text common-transition">
         Deck is a set of cards that participants can choose during a vote.
         The deck contains no more than 20 cards.
         Card values must be unique and no more than 6 characters.
@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="form-check mb-3">
-      <input class="form-check-input"
+      <input class="form-check-input common-transition"
              type="checkbox"
              id="watcherInput"
              formControlName="watcher">

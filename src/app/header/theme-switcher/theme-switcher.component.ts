@@ -20,6 +20,10 @@ export class ThemeSwitcherComponent implements OnInit {
   ngOnInit(): void {
     this.isLightTheme = JSON.parse(localStorage.getItem(AppConstants.lastTheme) as string) ?? false;
     this.updateTheme();
+    setTimeout(() => {
+      const root = this.document.documentElement;
+      root.style.setProperty("--common-transition-duration", "0.8s");
+    }, 10);
   }
 
   onThemeSwitchChange(): void {

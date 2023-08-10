@@ -11,7 +11,7 @@ import * as ParticipantAction from "../../../store/participant/participant.selec
   templateUrl: './deck-card.component.html',
   styleUrls: ['./deck-card.component.scss'],
   host: {
-    class: "card m-2"
+    class: "card common-transition m-2"
   }
 })
 export class DeckCardComponent implements OnInit {

@@ -11,6 +11,10 @@
   width: 30px;
 }
 
+.btn:hover > .add-user-icon {
+  transform: translate(0px, -2px);
+}
+
 .not-copied > .add-user-icon {
   background: url("src/assets/svg/add-user.svg") no-repeat;
   background-size: 26px 26px;
