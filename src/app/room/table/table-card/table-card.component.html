@@ -1,9 +1,13 @@
 <div class="card common-transition m-2"
      [ngClass]="{
       'voted': voted$ | async,
-      'bg-body-secondary': !(voted$ | async)
+      'bg-body-secondary': !(voted$ | async),
+      'rotateY180': (showVotingResult$ | async) && (voted$ | async)
      }">
   <div class="card-body d-flex align-items-center flex-column">
+    <h5 class="card-title">{{participant.nickname}}</h5>
+  </div>
+  <div class="card-body card-body-back d-flex align-items-center flex-column rotateY180">
     <h5 class="card-title">{{participant.nickname}}</h5>
     <p *ngIf="(showVotingResult$ | async) && (selectedCard$ | async)"
        class="card-text m-auto fs-5">
