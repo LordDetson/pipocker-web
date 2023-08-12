@@ -17,4 +17,8 @@ export const statusSelector = createSelector(
 export const selectedCardSelector = createSelector(
   currentParticipantFeatureSelector,
   (state: CurrentParticipantState): Card | undefined => state.selectedCard
-)
+);
+export const currentWatcherSelector = createSelector(
+  currentParticipantFeatureSelector,
+  (state: CurrentParticipantState): boolean => state.currentParticipant!.watcher
+);

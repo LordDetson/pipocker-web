@@ -28,3 +28,11 @@
   background-color: var(--bs-blue);
   color: white;
 }
+
+.eye-icon {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  background: url("/assets/svg/eye.svg") no-repeat;
+  background-size: 30px 30px;
+}
