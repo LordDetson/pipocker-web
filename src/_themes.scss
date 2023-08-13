@@ -23,5 +23,12 @@
     --bs-btn-hover-border-color: #557dc7;
     --bs-btn-active-bg: #4271cb;
     --bs-btn-active-border-color: #4271cb;
+    --bs-btn-disabled-bg: #4b6eaf;
+    --bs-btn-disabled-border-color: #4b6eaf;
+  }
+
+  .form-check-input:checked {
+    background-color:  #4b6eaf;
+    border-color: #4b6eaf;
   }
 }
