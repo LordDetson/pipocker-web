@@ -52,13 +52,21 @@ const _roomReducer = createReducer<RoomState>(initialRoomState,
     error,
     status: RoomStatus.error
   })),
-  on(RoomAction.removeParticipantSuccess, (state, {participant}) => ({
-    ...state,
-    room: {
-      ...state.room,
-      participants: state.room.participants.filter((item) => item.nickname !== participant.nickname)
+  on(RoomAction.removeParticipantSuccess, (state, {participant}) => {
+    let map: Map<string, Card> = new Map<string, Card>(state.room.votingResult.map);
+    map.delete(participant.nickname);
+    return {
+      ...state,
+      room: {
+        ...state.room,
+        participants: state.room.participants.filter((item) => item.nickname !== participant.nickname),
+        votingResult: {
+          ...state.room.votingResult,
+          map
+        }
+      }
     }
-  })),
+  }),
   on(RoomAction.removeParticipantFailure, (state, {error}) => ({
     ...state,
     error,

@@ -31,6 +31,7 @@ const _currentParticipantReducer = createReducer<CurrentParticipantState>(initia
   on(ParticipantAction.destroySuccess, (state) => ({
     ...state,
     currentParticipant: undefined,
+    selectedCard: undefined,
     status: CurrentParticipantStatus.success,
   })),
   on(ParticipantAction.initSelectedCurdSuccess, (state, {card}) => ({
