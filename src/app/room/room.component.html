@@ -4,5 +4,10 @@
 <ng-template #room>
   <app-buttons/>
   <app-table/>
-  <app-deck/>
+  <ng-container *ngIf="!(showVotingResult$ | async); else chart">
+    <app-deck/>
+  </ng-container>
+  <ng-template #chart>
+    <app-voting-result-chart/>
+  </ng-template>
 </ng-template>
