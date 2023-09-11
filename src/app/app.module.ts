@@ -22,6 +22,12 @@ import {TableComponent} from './room/table/table.component';
 import {DeckComponent} from './room/deck/deck.component';
 import {DeckCardComponent} from './room/deck/deck-card/deck-card.component';
 import {TableCardComponent} from './room/table/table-card/table-card.component';
+import {VotingResultChartComponent} from './room/voting-result-chart/voting-result-chart.component';
+import {NgChartsModule} from "ng2-charts";
+import {Chart} from "chart.js";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
+Chart.register(ChartDataLabels);
 
 @NgModule({
   declarations: [
@@ -35,7 +41,8 @@ import {TableCardComponent} from './room/table/table-card/table-card.component';
     TableComponent,
     DeckComponent,
     DeckCardComponent,
-    TableCardComponent
+    TableCardComponent,
+    VotingResultChartComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +59,8 @@ import {TableCardComponent} from './room/table/table-card/table-card.component';
       }
     }),
     StoreDevtoolsModule.instrument({maxAge: 25}),
-    EffectsModule.forRoot([RoomEffect, ParticipantEffect])
+    EffectsModule.forRoot([RoomEffect, ParticipantEffect]),
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

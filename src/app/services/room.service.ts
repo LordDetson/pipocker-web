@@ -22,7 +22,8 @@ export class RoomService {
   create(createRoom: any): Observable<Room> {
     return this.http.post<Room>(AppConstants.apiUrl + "/room", createRoom, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       }
     }).pipe(
       map((room: Room) => {

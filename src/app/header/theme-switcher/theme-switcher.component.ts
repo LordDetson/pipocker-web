@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit, Renderer2} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
 import {AppConstants} from "../../common/app-constants";
+import {ThemeService} from "ng2-charts";
+import {Chart, ChartOptions} from "chart.js";
 
 @Component({
   selector: 'app-theme-switcher',
@@ -13,7 +15,8 @@ export class ThemeSwitcherComponent implements OnInit {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private renderer2: Renderer2
+    private renderer2: Renderer2,
+    private themeService: ThemeService
   ) {
   }
 
@@ -34,5 +37,16 @@ export class ThemeSwitcherComponent implements OnInit {
 
   private updateTheme() {
     this.renderer2.setAttribute(this.document.body, 'data-bs-theme', this.isLightTheme ? 'light' : 'dark');
+    let overrides: ChartOptions = {};
+    if (this.isLightTheme) {
+      Chart.defaults.set('plugins.datalabels', {
+        color: '#343a40'
+      });
+    } else {
+      Chart.defaults.set('plugins.datalabels', {
+        color: '#ffffff'
+      });
+    }
+    this.themeService.setColorschemesOptions(overrides);
   }
 }
