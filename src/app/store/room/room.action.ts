@@ -20,9 +20,11 @@ export enum RoomActionType {
   cardSelectionSuccess = "[Room] card selection success",
   cardSelectionFailure = "[Room] card selection failure",
   showVotingResult = "[Room] show voting result",
+  showVotingResultSuccess = "[Room] show voting result success",
   startNewVoting = "[Room] start new voting",
   startNewVotingSuccess = "[Room] start new voting success",
   startNewVotingFailure = "[Room] start new voting failure",
+  doNothing = "[Room] do nothing",
 }
 
 export const create = createAction(RoomActionType.create,
@@ -48,11 +50,13 @@ export const removeParticipantFailure = createAction(RoomActionType.removePartic
 export const selectCard = createAction(RoomActionType.selectCard,
   props<{ participant: Participant, card: Card }>());
 export const cardSelectionSuccess = createAction(RoomActionType.cardSelectionSuccess,
-  props<{ vote: Vote }>());
+  props<{ participant: Participant, card: Card }>());
 export const cardSelectionFailure = createAction(RoomActionType.cardSelectionFailure,
   props<{ error: any }>());
 export const showVotingResult = createAction(RoomActionType.showVotingResult);
+export const showVotingResultSuccess = createAction(RoomActionType.showVotingResultSuccess);
 export const startNewVoting = createAction(RoomActionType.startNewVoting);
 export const startNewVotingSuccess = createAction(RoomActionType.startNewVotingSuccess);
 export const startNewVotingFailure = createAction(RoomActionType.startNewVotingFailure,
   props<{ error: any }>());
+export const doNothing = createAction(RoomActionType.doNothing);
