@@ -1,14 +1,14 @@
 pipeline {
   agent any
   stages {
-    stage ('Install node modules') {
+    stage ('Build pipoker-web image') {
       steps {
-        sh 'npm install'
+        sh 'docker build -t pipoker-web'
       }
     }
-    stage ('Build pipoker-web') {
+    stage ('Run pipoker-web') {
       steps {
-        sh 'npm run build:ssr'
+        sh 'docker run -d --network pipokernet -p 80:80 --name pipoker-web pipoker-web:latest'
       }
     }
   }
