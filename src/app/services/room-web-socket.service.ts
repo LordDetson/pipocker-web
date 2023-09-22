@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {AppConstants} from "../common/app-constants";
 import * as SockJS from "sockjs-client";
 import * as Stomp from "stompjs";
 import {RoomEvent} from "../models/room-event";
 import {Store} from "@ngrx/store";
 import * as RoomAction from "../store/room/room.action";
+import {environment} from "../../env/env";
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +17,12 @@ export class RoomWebSocketService {
   }
 
   connect(roomId: string) {
-    this.stompClient = Stomp.over(new SockJS(AppConstants.wsUrl));
+    this.stompClient = Stomp.over(new SockJS(environment.wsUrl));
     const _this = this;
     _this.stompClient.connect({}, (obj: any) => {
       console.log(obj);
       console.log(JSON.stringify(obj));
-      _this.stompClient.subscribe(AppConstants.roomTopic + roomId, (message: any) => {
+      _this.stompClient.subscribe(environment.roomTopic + roomId, (message: any) => {
         _this.handleEvent(JSON.parse(message.body));
       });
     }, (error: any) => {
