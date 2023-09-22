@@ -3,6 +3,7 @@ import {select, Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {idSelector, nameSelector} from "../store/room/room.selector";
 import {Clipboard} from '@angular/cdk/clipboard';
+import {AppConstants} from "../common/app-constants";
 
 @Component({
   selector: 'app-header',
@@ -22,7 +23,7 @@ export class HeaderComponent {
   }
 
   copyInvitationLink(roomId: string): void {
-    this.clipboard.copy("http://localhost:4200/room/" + roomId);
+    this.clipboard.copy(AppConstants.invitationUrl + roomId);
     this.copied = true;
     setTimeout(() => this.copied = false, 1500);
   }
