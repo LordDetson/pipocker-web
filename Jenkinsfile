@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage ('Build pipoker-web image') {
       steps {
-        sh 'docker build -t pipoker-web'
+        sh 'docker build -t pipoker-web .'
       }
     }
     stage ('Run pipoker-web') {
