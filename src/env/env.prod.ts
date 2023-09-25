@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
   profile: "prod",
-  apiUrl: "http://164.92.158.225:81/api",
-  wsUrl: "http://164.92.158.225:81/ws",
-  invitationUrl: "http://164.92.158.225/room/",
+  apiUrl: "http://pipoker.online:81/api",
+  wsUrl: "http://pipoker.online:81/ws",
+  invitationUrl: "http://pipoker.online/room/",
   roomTopic: "/topic/room."
 };
